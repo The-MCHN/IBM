@@ -84,7 +84,9 @@ def get_pie_chart(entered_site):
             Input(component_id="payload-slider", component_property="value")])
 def get_payload_slider(entered_site, payload_value):
     filtered_df = spacex_df
-    if entered_site == 'ALL':
+    if entered_site == 'ALL':      
+        filtered_df=filtered_df[(filtered_df['Payload Mass (kg)']>payload_value[0]) & (filtered_df['Payload Mass (kg)']<payload_value[1])]
+
         fig = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', 
         color="Booster Version Category",
         title='Correlation between Payload and Success for all Sites')
